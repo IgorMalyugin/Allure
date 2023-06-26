@@ -6,8 +6,8 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.attachment;
 import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.linkText;
 
@@ -42,6 +42,8 @@ public class LambdaTest {
             $(withText("#" + issue)).should(Condition.exist);
         });
 
+        attachment("Source", webdriver().driver().source());
+
 
     }
 
@@ -54,6 +56,7 @@ public class LambdaTest {
                 .clickOnRepositoryLink(repository)
                 .openIssuesTab()
                 .shouldSeeIssueWithNumber(issue);
+        metodTest.takeScreenshot();
 
     }
 }
